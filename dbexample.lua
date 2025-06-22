@@ -125,7 +125,7 @@ end
 
 function SigmaDB.upsertPlayerStats(userId, health, stamina, hunger, oxygen, temperature)
     local query = "INSERT INTO PlayerStats (PlayerId, Health, Stamina, Hunger, Oxygen, Temperature) VALUES (?, ?, ?, ?, ?, ?) " ..
-                  "ON CONFLICT(PlayerId) DO UPDATE SET Health = ?, Stamina = ?, Hunger = ?, Oxygen = ?, Temperature = ?"
+                "ON CONFLICT(PlayerId) DO UPDATE SET Health = ?, Stamina = ?, Hunger = ?, Oxygen = ?, Temperature = ?"
     local params = {userId, health, stamina, hunger, oxygen, temperature, health, stamina, hunger, oxygen, temperature}
     local data, err = sendSQLRequest(query, params)
     if data then
@@ -137,7 +137,7 @@ end
 
 function SigmaDB.savePlayerPosition(userId, serverId, x, y, z)
     local query = "INSERT INTO PlayerPositions (PlayerId, ServerId, X, Y, Z) VALUES (?, ?, ?, ?, ?) " ..
-                  "ON CONFLICT(PlayerId, ServerId) DO UPDATE SET X = ?, Y = ?, Z = ?"
+                "ON CONFLICT(PlayerId, ServerId) DO UPDATE SET X = ?, Y = ?, Z = ?"
     local params = {userId, serverId, x, y, z, x, y, z}
     local data, err = sendSQLRequest(query, params)
     if data then
@@ -160,7 +160,7 @@ end
 
 function SigmaDB.savePlayerServerData(userId, serverId, saveData)
     local query = "INSERT INTO PlayerServerSaves (PlayerId, ServerId, SaveData) VALUES (?, ?, ?) " ..
-                  "ON CONFLICT(PlayerId, ServerId) DO UPDATE SET SaveData = ?"
+                "ON CONFLICT(PlayerId, ServerId) DO UPDATE SET SaveData = ?"
     local params = {userId, serverId, HttpService:JSONEncode(saveData), HttpService:JSONEncode(saveData)}
     local data, err = sendSQLRequest(query, params)
     if data then
