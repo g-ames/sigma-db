@@ -46,7 +46,7 @@ function runQuery(sql, params = []) {
                     resolve({ changes: this.changes, lastID: this.lastID });
                 }
             });
-        }
+        }     
     });
 }
 
