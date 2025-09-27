@@ -2,12 +2,12 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const dotenv = require('dotenv');
 const fs = require('fs');
-const https = require('https');
+const httpolyglot = require('httpolyglot'); // 👈 instead of https
 
 var privateKey = fs.readFileSync('../certificate.key');
 var certificate = fs.readFileSync('../certificate.cer');
 
-var credentials = {key: privateKey, cert: certificate};
+var credentials = { key: privateKey, cert: certificate };
 
 dotenv.config();
 
@@ -72,8 +72,9 @@ app.post('/sql', async (req, res) => {
     }
 });
 
-https.createServer(credentials, app).listen(PORT, () => {
-    console.log(`Sigma-DB server running on http://localhost:${PORT}`);
+// 👇 httpolyglot server here
+httpolyglot.createServer(credentials, app).listen(PORT, () => {
+    console.log(`Sigma-DB server running on http(s)://localhost:${PORT}`);
     console.log(`Database file: ${DB_PATH}`);
 });
 
