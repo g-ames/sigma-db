@@ -4,8 +4,8 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const https = require('https');
 
-var privateKey = fs.readFileSync('../server.key');
-var certificate = fs.readFileSync('../server.crt');
+var privateKey = fs.readFileSync('../certificate.key');
+var certificate = fs.readFileSync('../certificate.crt');
 
 var credentials = {key: privateKey, cert: certificate};
 
